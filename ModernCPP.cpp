@@ -3,26 +3,17 @@
 
 #include <iostream>
 #include <compare>
+#include "Static.h"
+#include "Variadic.h"
 
-//////////////////////////////////////////////////////////////////////////
-//	CmpIntStatic
-//////////////////////////////////////////////////////////////////////////
-template<class T>
-struct CompareNumStatic
-{
-    explicit constexpr CompareNumStatic(const T& Value) : m_value(Value) {}
-    
-    auto operator<=>(const CompareNumStatic&) const = default;
-
-private:
-
-    T m_value;
-};
 
 int main()
 {
     using namespace std;
-    
+
     static_assert(CompareNumStatic{ 3.14f } < CompareNumStatic{ 99.0f });
     static_assert(CompareNumStatic{ 45 } >= CompareNumStatic{ 42 });
+
+    static_assert(StaticSum(1.0, 2, 3.0f) == 6);
+    static_assert(StaticSumSquares(1.0, 2, 3.0f) == 14.0);
 }
